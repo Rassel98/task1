@@ -6,7 +6,7 @@ import 'package:task_app/app/data/models/task_model.dart';
 
 class DBHelper {
   DBHelper._init();
-  static const String createAddTaskTable = '''CREATE TABLE $tableTask(
+  static const String createTaskTable = '''CREATE TABLE $tableTask(
       $tabTaskColId INTEGER PRIMARY KEY AUTOINCREMENT,
       $tabTaskColTitle TEXT NOT NULL,
       $tabTaskColDescription TEXT,
@@ -29,7 +29,7 @@ class DBHelper {
       path,
       version: 1,
       onCreate: (db, version) async {
-        db.execute(createAddTaskTable);
+        db.execute(createTaskTable);
       },
     );
   }
