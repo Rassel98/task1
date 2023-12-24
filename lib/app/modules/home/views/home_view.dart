@@ -33,7 +33,7 @@ class HomeView extends GetView<HomeController> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                          hintText: "Search users",
+                          hintText: "Search task",
                           prefixIcon: const Icon(CupertinoIcons.search_circle_fill),
                           hintStyle: const TextStyle(color: Colors.grey),
                           border: OutlineInputBorder(
