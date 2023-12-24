@@ -168,7 +168,7 @@ class HomeView extends GetView<HomeController> {
                     );
                   },
                 )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(
           () => const NewTaskView(),
