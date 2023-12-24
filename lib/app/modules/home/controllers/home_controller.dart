@@ -16,6 +16,10 @@ class HomeController extends GetxController {
   final descriptionController = TextEditingController();
   final _taskList = <TaskModel>[].obs;
   List<TaskModel> get getTaskList => _taskList;
+
+  Rx<List<TaskModel>> _searchTask = Rx<List<TaskModel>>([]);
+  List<TaskModel> get searchTask => _searchTask.value;
+
   late TaskRepository taskRepository;
 
   @override
@@ -52,8 +56,9 @@ class HomeController extends GetxController {
     int insertedId = await taskRepository.insertTask(taskModel);
     if (insertedId > 0) {
       taskModel.id = insertedId;
-      taskModel.id = insertedId;
       _taskList.add(taskModel);
+      titleController.clear();
+      descriptionController.clear();
       showMessage(title: "Success !!", message: "Data inserted successfully.", duration: 3);
       print('Data inserted successfully. Inserted ID: $insertedId');
     } else {
@@ -108,6 +113,7 @@ class HomeController extends GetxController {
     if (response.isNotEmpty) {
       print('All tasks:');
       _taskList.addAll(response);
+      runFilter("");
       isLoading(false);
     } else {
       isLoading(false);
@@ -116,4 +122,12 @@ class HomeController extends GetxController {
   }
 
   void close() => taskRepository.close();
+
+  void runFilter(String enterKey) {
+    if (enterKey.isEmpty) {
+      _searchTask.value = getTaskList;
+    } else {
+      _searchTask.value = getTaskList.where((element) => element.title.toLowerCase().contains(enterKey.toLowerCase())).toList();
+    }
+  }
 }
